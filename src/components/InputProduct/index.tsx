@@ -78,6 +78,7 @@ const InputProduct = () => {
 
   return (
     <div>
+      <h1 className='mb-[40px] text-[30px] uppercase'>Nhập hàng</h1>
       <Button onClick={() => setOpenModal(true)} size='large' className='mb-[20px]'>Thêm sản phẩm</Button>
       <Table columns={columns} dataSource={data} bordered />
       <ModalInputProduct openModal={openModal} setOpenModal={setOpenModal} />
