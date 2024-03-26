@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-import { MdInput } from 'react-icons/md'
+import { MdInput, MdHistory } from 'react-icons/md'
 
 import SidebarLinkGroup from "./SidebarLinkGroup";
 
@@ -202,7 +202,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
-              {/* <!-- Menu Item Calendar --> */}
+              {/* <!-- Menu Item import history --> */}
               <li>
                 <Link
                   href="/nhap-hang"
@@ -214,7 +214,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   Nhập hàng
                 </Link>
               </li>
-              {/* <!-- Menu Item Calendar --> */}
+              {/* <!-- Menu Item import history --> */}
+
+              {/* <!-- Menu Item import history --> */}
+              <li>
+                <Link
+                  href="/lich-su-nhap-hang"
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes("calendar") &&
+                    "bg-graydark dark:bg-meta-4"
+                    }`}
+                >
+                  <MdHistory />
+                  Lịch sử nhập hàng
+                </Link>
+              </li>
+              {/* <!-- Menu Item import history --> */}
             </ul>
           </div>
 
