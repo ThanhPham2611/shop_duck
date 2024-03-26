@@ -3,10 +3,11 @@ import { FormatCurrency } from '@/utils/format';
 import { Button, Table } from 'antd';
 import type { TableProps } from 'antd';
 import { ModalInputProduct } from '../ModalInputProduct';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { get } from '@/service/axios';
 
-interface DataType {
-  key: string;
+export interface DataType {
+  _id: string;
   productName: string;
   importAmount: number;
   importPrice: number;
@@ -15,6 +16,7 @@ interface DataType {
   quantity: number
 }
 const InputProduct = () => {
+  const [dataTable, setDataTable] = useState<DataType[]>([])
   const [openModal, setOpenModal] = useState<boolean>(false);
   const columns: TableProps<DataType>['columns'] = [
     {
@@ -60,28 +62,30 @@ const InputProduct = () => {
       title: 'Lãi nhận',
       dataIndex: 'interest',
       key: 'interest',
-      render: (interest: number) => <span>{FormatCurrency(interest)}</span>
+      render: (_, record) => <span>{FormatCurrency(record.price - record.importPrice)}</span>
     }
   ];
 
-  const data = [
-    {
-      key: '1',
-      productName: 'Oishi',
-      importPrice: 8000,
-      price: 10000,
-      interest: 2000,
-      importAmount: 1,
-      quantity: 1
-    }
-  ]
+  useEffect(() => {
+    getDataProduct()
+  }, [])
+
+  const getDataProduct = async () => {
+    const response = await get('warehouse');
+    setDataTable(response)
+  }
 
   return (
     <div>
       <h1 className='mb-[40px] text-[30px] uppercase'>Nhập hàng</h1>
       <Button onClick={() => setOpenModal(true)} size='large' className='mb-[20px]'>Thêm sản phẩm</Button>
-      <Table columns={columns} dataSource={data} bordered />
-      <ModalInputProduct openModal={openModal} setOpenModal={setOpenModal} />
+      <Table columns={columns} dataSource={dataTable} bordered />
+      <ModalInputProduct
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        dataProduct={dataTable}
+        callBackFnc={getDataProduct}
+      />
     </div>
   );
 }
