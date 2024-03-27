@@ -8,7 +8,7 @@ const instance = axios.create({
 
 export const get = async (url: string, params?: object) => {
   try {
-    const response: AxiosResponse = await instance.get(SLASH + url, params);
+    const response: AxiosResponse = await instance.get(SLASH + url, { params });
     return response.data;
   } catch (err) {
     console.log(err)

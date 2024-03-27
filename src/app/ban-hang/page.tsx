@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import InputProduct from '@/components/InputProduct';
+import SellProduct from '@/components/Sell-product';
 
 export const metadata: Metadata = {
   title: "Next.js Calender | TailAdmin - Next.js Dashboard Template",
@@ -8,12 +8,12 @@ export const metadata: Metadata = {
     "This is Next.js Calender page for TailAdmin  Tailwind CSS Admin Dashboard Template",
 };
 
-const InputProductScreen = () => {
+const SellProductScreen = () => {
   return (
     <DefaultLayout>
-      <InputProduct />
+      <SellProduct />
     </DefaultLayout>
   );
 };
 
-export default InputProductScreen;
+export default SellProductScreen;
